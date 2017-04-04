@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:columnCount="3">
+
+    <TextView
+        android:id="@+id/contactAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="1"
+        android:layout_rowSpan="6"
+        android:paddingTop="@dimen/activity_contact_vertical_margin"
+        android:paddingBottom="@dimen/activity_contact_vertical_margin"
+        android:paddingRight="@dimen/activity_contact_horizontal_margin"
+        android:text="@string/contact" />
+
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="1"
+        android:text="@string/name" />
+
+    <EditText
+        android:id="@+id/editContactName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="1"
+        android:ems="10"
+        android:hint="@string/nav_name"
+        android:inputType="textPersonName"
+        android:paddingLeft="@dimen/activity_horizontal_margin" />
+
+    <TextView
+        android:id="@+id/textMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="1"
+        android:text="@string/mail" />
+
+    <EditText
+        android:id="@+id/editContactMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="1"
+        android:ems="10"
+        android:hint="@string/mail"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="@dimen/activity_horizontal_margin" />
+
+    <TextView
+        android:id="@+id/textPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="1"
+        android:text="@string/phone" />
+
+    <EditText
+        android:id="@+id/editContactPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="1"
+        android:ems="10"
+        android:hint="@string/phone"
+        android:inputType="phone"
+        android:paddingLeft="@dimen/activity_horizontal_margin" />
+
+    <TextView
+        android:id="@+id/textContactRelationship"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="1"
+        android:text="@string/relationship" />
+
+    <EditText
+        android:id="@+id/editContactRelationship"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="1"
+        android:ems="10"
+        android:hint="@string/relationship"
+        android:inputType="textPersonName"
+        android:paddingLeft="@dimen/activity_horizontal_margin" />
+
+    <Switch
+        android:id="@+id/switchContactNotify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/notify"
+        android:layout_columnSpan="2"
+        android:paddingRight="@dimen/activity_contact_vertical_margin"/>
+
+    <Button
+        android:text="@string/add_new_contact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonSaveNewContact"
+        android:layout_marginLeft="@dimen/activity_contact_vertical_margin"
+        android:layout_columnSpan="2"/>
+
+</GridLayout>

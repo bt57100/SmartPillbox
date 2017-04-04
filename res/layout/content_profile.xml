@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_profile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.ece.ing4.ppe.smartpillbox.smartpillbox.ProfileActivity"
+    tools:showIn="@layout/app_bar_profile">
+
+    <ScrollView android:id="@+id/ScrollViewID"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:text="@string/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textName"
+                android:layout_weight="1"
+                android:layout_columnSpan="1" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="@string/nav_name"
+                android:ems="10"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:id="@+id/editName"
+                android:layout_weight="1"
+                android:layout_columnSpan="2"/>
+
+            <TextView
+                android:text="@string/birth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textBirth"
+                android:layout_weight="1"
+                android:layout_columnSpan="1" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="@string/birth_format"
+                android:ems="10"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:id="@+id/editBirth"
+                android:layout_weight="1"
+                android:layout_columnSpan="2"/>
+
+            <TextView
+                android:text="@string/height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textHeight"
+                android:layout_weight="1"
+                android:layout_columnSpan="1" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="@string/height"
+                android:ems="10"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:id="@+id/editHeight"
+                android:layout_weight="1"
+                android:layout_columnSpan="2"/>
+
+            <TextView
+                android:text="@string/weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textWeight"
+                android:layout_weight="1"
+                android:layout_columnSpan="1" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="@string/weight"
+                android:ems="10"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:id="@+id/editWeight"
+                android:layout_weight="1"
+                android:layout_columnSpan="2"/>
+
+            <TextView
+                android:text="@string/mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textMail"
+                android:layout_weight="1"
+                android:layout_columnSpan="1" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="@string/mail"
+                android:ems="10"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:id="@+id/editMail"
+                android:layout_weight="1"
+                android:layout_columnSpan="2"/>
+
+            <TextView
+                android:text="@string/phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textPhone"
+                android:layout_weight="1"
+                android:layout_columnSpan="1" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="@string/phone"
+                android:ems="10"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:id="@+id/editPhone"
+                android:layout_weight="1"
+                android:layout_columnSpan="2"/>
+
+            <TextView
+                android:text="@string/ref_doctor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textDoctor"
+                android:layout_weight="1"
+                android:layout_columnSpan="1" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="@string/ref_doctor"
+                android:ems="10"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:id="@+id/editDoctor"
+                android:layout_weight="1"
+                android:layout_columnSpan="2"/>
+
+            <TextView
+                android:text="@string/ref_pharmacist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textPharmacist"
+                android:layout_weight="1"
+                android:layout_columnSpan="1" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="@string/ref_pharmacist"
+                android:ems="10"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:id="@+id/editPharmacist"
+                android:layout_weight="1"
+                android:layout_columnSpan="2"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:id="@+id/spinnerUserContact"
+                android:layout_columnSpan="3" />
+
+            <Button
+                android:text="@string/save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonSaveNewProfile"
+                android:layout_columnSpan="3"/>
+        </GridLayout>
+    </ScrollView>
+</RelativeLayout>
