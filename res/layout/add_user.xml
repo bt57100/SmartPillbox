@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- Name Label -->
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="User Name"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:textSize="17dip"/>
+
+    <!-- Input Name -->
+    <EditText android:id="@+id/inputName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:inputType="textPersonName"
+        android:layout_marginBottom="15dip"
+        android:maxLines="1"/>
+
+    <!-- Phone number Label -->
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Phone number"
+        android:paddingLeft="10dip"
+        android:textSize="17dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:maxLines="1"/>
+
+    <!-- Input pharmacist number -->
+    <EditText android:id="@+id/inputPhone"
+        android:layout_width="fill_parent"
+        android:layout_height="47dp"
+        android:layout_margin="5dip"
+        android:layout_marginBottom="15dip"
+        android:inputType="phone"
+        android:lines="1"
+        android:gravity="top"/>
+
+    <!-- Email Label -->
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Email address"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:textSize="17dip"/>
+
+    <!-- Input Email -->
+    <EditText android:id="@+id/inputEmail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:layout_marginBottom="15dip"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"/>
+
+    <!-- Referring doctor Label -->
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Referring doctor"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:textSize="17dip"
+        android:maxLines="1"/>
+
+    <!-- Input referring doctor -->
+    <EditText android:id="@+id/inputRef"
+        android:layout_width="fill_parent"
+        android:layout_height="47dp"
+        android:layout_margin="5dip"
+        android:layout_marginBottom="15dip"
+        android:inputType="text"
+        android:lines="1"
+        android:gravity="top"/>
+
+    <!-- Pharmacist phone number Label -->
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Pharmacist number"
+        android:paddingLeft="10dip"
+        android:textSize="17dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:maxLines="1"/>
+
+    <!-- Input pharmacist phone number -->
+    <EditText android:id="@+id/inputPharm"
+        android:layout_width="fill_parent"
+        android:layout_height="47dp"
+        android:layout_margin="5dip"
+        android:layout_marginBottom="15dip"
+        android:inputType="phone"
+        android:lines="1"
+        android:gravity="top"/>
+
+    <!-- Button Create Product -->
+    <Button android:id="@+id/btnCreateUser"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Create User"/>
+
+
+</LinearLayout>

@@ -7,8 +7,8 @@ package com.ece.ing4.ppe.smartpillbox.smartpillbox;
 public final class MyGlobalVars {
 
     // Cookie
-    private static final String cookie="bee48062b61a751e23b813174183a983";
-    public static final String myCookie = "__test="+cookie+"; expires=Fri, 1-Jan-38 00:55:55 GMT; path=/";
+    private static final String cookie="b41025af4de332ae7f5d806ab1ece154";
+    public static final String myCookie = "__test="+cookie+"; expires=Fri, 1-Jan-38 12:55:55 GMT; path=/";
 
     // URL
     public static final String url_get_user = "http://smartpillbox.byethost7.com/database/user/get_user_info.php?";
@@ -22,6 +22,9 @@ public final class MyGlobalVars {
     public static final String url_get_contact = "http://smartpillbox.byethost7.com/database/contact/get_all_contacts.php?";
     public static final String url_add_contact = "http://smartpillbox.byethost7.com/database/contact/create_contact.php?";
     public static final String url_delete_contact = "http://smartpillbox.byethost7.com/database/contact/delete_contact.php?";
+    public static final String url_get_all_treatments = "http://smartpillbox.byethost7.com/database/treatment/get_all_treatment.php?USER_ID=";
+    public static final String url_get_all_medicine = "http://smartpillbox.byethost7.com/database/medicine/get_all_medicine.php?TREATMENT_ID=";
+    public static final String url_update_medicine_info = "http://smartpillbox.byethost7.com/database/medicine/update_medicine_info.php?";
     // Connection timeout
     public static final int TIMEOUT = 4000;
 
@@ -61,4 +64,15 @@ public final class MyGlobalVars {
     public static final String TAG_NOTIFICATION_MESSAGE= "Time to take your pills !";
     public static final String TAG_APP_NAME = "SmartPillbox";
     public static final int HOUR_SMS = 14;
+
+
+    // JSON Node names
+    public static final String TAG_BATCH_NUMBER = "BATCH_NUMBER";
+    public static final String TAG_EXPIRATION_DATE = "EXPIRATION_DATE";
+    public static final String TAG_DOSAGE = "DOSAGE";
+    public static final String TAG_START_DATE = "START_DATE";
+    public static final String TAG_END_DATE = "END_DATE";
+    public static final String TAG_DOCTOR = "DOCTOR";
+    public static final String TAG_TREATMENT_MIN = "treatment";
+    public static final String TAG_MEDICINE = "medicine";
 }

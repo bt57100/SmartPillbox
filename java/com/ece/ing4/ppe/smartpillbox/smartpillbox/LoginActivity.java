@@ -202,8 +202,7 @@ public class LoginActivity extends AppCompatActivity {
                 user_name = this.userName;
                 success();
             } else {
-                Toast.makeText(getApplicationContext(), this.message,
-                        Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), this.message,Toast.LENGTH_LONG).show();
             }
             mEmailSignInButton.setClickable(true);
         }

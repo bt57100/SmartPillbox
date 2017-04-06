@@ -77,4 +77,6 @@
     <string name="patient">Patient</string>
     <string name="add_new_patient">Add new patient</string>
 
+    <string name="current_medicine">Current Medicine :</string>
+
 </resources>
