@@ -25,6 +25,8 @@ public final class MyGlobalVars {
     public static final String url_get_all_treatments = "http://smartpillbox.byethost7.com/database/treatment/get_all_treatment.php?USER_ID=";
     public static final String url_get_all_medicine = "http://smartpillbox.byethost7.com/database/medicine/get_all_medicine.php?TREATMENT_ID=";
     public static final String url_update_medicine_info = "http://smartpillbox.byethost7.com/database/medicine/update_medicine_info.php?";
+    public static final String url_add_medicine = "http://smartpillbox.byethost7.com/database/medicine/create_medicine.php?";
+    public static final String url_add_treatment = "http://smartpillbox.byethost7.com/database/treatment/create_treatment.php?";
     // Connection timeout
     public static final int TIMEOUT = 4000;
 

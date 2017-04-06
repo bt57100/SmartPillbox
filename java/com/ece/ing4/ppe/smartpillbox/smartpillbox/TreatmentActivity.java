@@ -87,7 +87,7 @@ public class TreatmentActivity extends AppCompatActivity
 
         // getting product details from intent
         Intent i = getIntent();
-        if(i.hasExtra(MyGlobalVars.TAG_USER_ID)) {
+        if (i.hasExtra(MyGlobalVars.TAG_USER_ID)) {
             // getting user id from intent
             user_id = i.getStringExtra(MyGlobalVars.TAG_USER_ID);
             user_name = i.getStringExtra(MyGlobalVars.TAG_NAME);
@@ -98,9 +98,9 @@ public class TreatmentActivity extends AppCompatActivity
             startActivity(new Intent(this, LoginActivity.class));
         }
 
-        t = (EditText) findViewById(R.id.opLevel);
+        //t = (EditText) findViewById(R.id.opLevel);
 
-        mytextName = (TextView) findViewById(R.id.mytextName);
+        //mytextName = (TextView) findViewById(R.id.mytextName);
 
         spinnerTreatment = (Spinner) findViewById(R.id.spinnerTreatment);
 
@@ -123,7 +123,7 @@ public class TreatmentActivity extends AppCompatActivity
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // your code here
-                new GetMedicineDetails().execute();
+                //new GetMedicineDetails().execute();
             }
 
         });
@@ -154,7 +154,7 @@ public class TreatmentActivity extends AppCompatActivity
         // Getting complete product details in background thread
         new GetTreatmentDetails().execute();
 
-        // Getting complete product details in background thread
+        // Getting complete product details in backgroun"d thread
         //new GetMedicineDetails().execute();
 
     }
@@ -177,37 +177,37 @@ public class TreatmentActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             // Go to home page
             Intent i = new Intent(this, SmartPillboxMainActivity.class);
-            i.putExtra(MyGlobalVars.TAG_USER_ID,user_id);
+            i.putExtra(MyGlobalVars.TAG_USER_ID, user_id);
             i.putExtra(MyGlobalVars.TAG_NAME, user_name);
-            i.putExtra(MyGlobalVars.TAG_MEDICAL_STAFF,medical_staff);
+            i.putExtra(MyGlobalVars.TAG_MEDICAL_STAFF, medical_staff);
             startActivity(i);
         } else if (id == R.id.nav_profile) {
             // Go to profile page
             Intent i = new Intent(this, ProfileActivity.class);
-            i.putExtra(MyGlobalVars.TAG_USER_ID,user_id);
+            i.putExtra(MyGlobalVars.TAG_USER_ID, user_id);
             i.putExtra(MyGlobalVars.TAG_NAME, user_name);
-            i.putExtra(MyGlobalVars.TAG_MEDICAL_STAFF,medical_staff);
+            i.putExtra(MyGlobalVars.TAG_MEDICAL_STAFF, medical_staff);
             startActivity(i);
         } else if (id == R.id.nav_treatment) {
             // Go to treatment page
             Intent i = new Intent(this, TreatmentActivity.class);
-            i.putExtra(MyGlobalVars.TAG_USER_ID,user_id);
+            i.putExtra(MyGlobalVars.TAG_USER_ID, user_id);
             i.putExtra(MyGlobalVars.TAG_NAME, user_name);
-            i.putExtra(MyGlobalVars.TAG_MEDICAL_STAFF,medical_staff);
+            i.putExtra(MyGlobalVars.TAG_MEDICAL_STAFF, medical_staff);
             startActivity(i);
         } else if (id == R.id.nav_patient) {
             // Go to patient page
             Intent i = new Intent(this, PatientActivity.class);
-            i.putExtra(MyGlobalVars.TAG_USER_ID,user_id);
+            i.putExtra(MyGlobalVars.TAG_USER_ID, user_id);
             i.putExtra(MyGlobalVars.TAG_NAME, user_name);
-            i.putExtra(MyGlobalVars.TAG_MEDICAL_STAFF,medical_staff);
+            i.putExtra(MyGlobalVars.TAG_MEDICAL_STAFF, medical_staff);
             startActivity(i);
         } else if (id == R.id.nav_settings) {
             // Go to settings page
             Intent i = new Intent(this, SettingsActivity.class);
-            i.putExtra(MyGlobalVars.TAG_USER_ID,user_id);
+            i.putExtra(MyGlobalVars.TAG_USER_ID, user_id);
             i.putExtra(MyGlobalVars.TAG_NAME, user_name);
-            i.putExtra(MyGlobalVars.TAG_MEDICAL_STAFF,medical_staff);
+            i.putExtra(MyGlobalVars.TAG_MEDICAL_STAFF, medical_staff);
             startActivity(i);
         } else if (id == R.id.nav_logout) {
             // Log out
@@ -321,8 +321,249 @@ public class TreatmentActivity extends AppCompatActivity
             lm.addView(myMedicine.get(j));
         }
     }
+
+    private void addTreatmentsave() {
+        new addTreatmentToUser().execute();
+    }
      /*mAuthTask = new TreatmentTask(email, password);
             mAuthTask.execute((Void) null);*/
+
+    class addTreatmentToUser extends AsyncTask<Void, Void, Void> {
+
+        private String data = "";
+        private ArrayList<String> success = new ArrayList<>();
+        private String start_date, end_date, doctor;
+
+        HttpURLConnection urlConnection;
+        JSONObject jsonData;
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            number = 0;
+            pDialog = new ProgressDialog(TreatmentActivity.this);
+            pDialog.setMessage("Loading user details. Please wait...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+            start_date = user;
+            end_date = nom;
+            doctor = expiration;
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                data = updateJSON(MyGlobalVars.url_add_treatment);
+                jsonData = new JSONObject(data);
+                success.add(jsonData.getString(MyGlobalVars.TAG_SUCCESS));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        // http://smartpillbox.byethost7.com/database/medicine/update_medicine_info.php?TREATMENT_ID=1&BATCH_NUMBER=bfjkng897hj82&NAME=granddieu&DOSAGE=soir%20et%20matin&EXPIRATION_DATE=2018-04-20%2000:00:00
+        // TREATMENT_ID=1&BATCH_NUMBER=bfjkng897hj82&NAME=granddieu&DOSAGE=soir%20et%20matin&EXPIRATION_DATE=2018-04-20%2000:00:00
+        public String updateJSON(String url) {
+            HttpURLConnection connection = null;
+            try {
+                String update = "" + url
+                        + MyGlobalVars.TAG_USER_ID + "=" + user_id + "&"
+                        + MyGlobalVars.TAG_START_DATE + "=" + start_date + "&"
+                        + MyGlobalVars.TAG_END_DATE + "=" + end_date + "&"
+                        + MyGlobalVars.TAG_DOCTOR + "=" + doctor ;
+                update = update.replaceAll(" ", "%20");
+                URL u = new URL(update);
+                connection = (HttpURLConnection) u.openConnection();
+                connection.setRequestMethod("GET");
+                connection.setRequestProperty("Content-length", "0");
+                connection.setUseCaches(false);
+                connection.setDoInput(true);
+                connection.setDoOutput(true);
+                connection.setAllowUserInteraction(false);
+                connection.setConnectTimeout(MyGlobalVars.TIMEOUT);
+                connection.setReadTimeout(MyGlobalVars.TIMEOUT);
+                connection.setRequestProperty("Cookie", MyGlobalVars.myCookie);
+                connection.connect();
+                int status = connection.getResponseCode();
+                switch (status) {
+                    case 200:
+                    case 201:
+                        InputStream responseStream = new BufferedInputStream(connection.getInputStream());
+                        BufferedReader br = new BufferedReader(new InputStreamReader(responseStream), 8);
+                        StringBuilder sb = new StringBuilder();
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            sb.append(line).append("\n");
+                        }
+                        br.close();
+                        String response = sb.toString();
+                        return response;
+                }
+
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                if (connection != null) {
+                    try {
+                        connection.disconnect();
+                    } catch (Exception ex) {
+                        Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         **/
+        protected void onPostExecute(Void file_url) {
+            // dismiss the dialog once got all details
+            //editContact.setText(data);
+            for (String ok : success) {
+                if (ok.contentEquals("0")) {
+                    Toast.makeText(getBaseContext(), "Failed to update", Toast.LENGTH_SHORT);
+                }
+            }
+            if (pDialog.isShowing()) {
+                pDialog.dismiss();
+            }
+
+            spinnerTreatment.setAdapter(null);
+            initializeSpinner(spinnerTreatment);
+            new GetTreatmentDetails().execute();
+        }
+    }
+
+    private void addMedicinesave() {
+        new addMecineToUser().execute();
+    }
+     /*mAuthTask = new TreatmentTask(email, password);
+            mAuthTask.execute((Void) null);*/
+
+    class addMecineToUser extends AsyncTask<Void, Void, Void> {
+
+        private String data = "";
+        private ArrayList<String> success = new ArrayList<>();
+        private String dosage, name, expiration_date, batch_number, treatment_id = myTest2;
+
+        HttpURLConnection urlConnection;
+        JSONObject jsonData;
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            number = 0;
+            pDialog = new ProgressDialog(TreatmentActivity.this);
+            pDialog.setMessage("Loading user details. Please wait...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+            batch_number = user;
+            name = nom;
+            expiration_date = expiration;
+            dosage = dose;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                data = updateJSON(MyGlobalVars.url_add_medicine);
+                jsonData = new JSONObject(data);
+                success.add(jsonData.getString(MyGlobalVars.TAG_SUCCESS));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        // http://smartpillbox.byethost7.com/database/medicine/update_medicine_info.php?TREATMENT_ID=1&BATCH_NUMBER=bfjkng897hj82&NAME=granddieu&DOSAGE=soir%20et%20matin&EXPIRATION_DATE=2018-04-20%2000:00:00
+        // TREATMENT_ID=1&BATCH_NUMBER=bfjkng897hj82&NAME=granddieu&DOSAGE=soir%20et%20matin&EXPIRATION_DATE=2018-04-20%2000:00:00
+        public String updateJSON(String url) {
+            HttpURLConnection connection = null;
+            try {
+                String update = "" + url
+                        + MyGlobalVars.TAG_BATCH_NUMBER + "=" + batch_number + "&"
+                        + MyGlobalVars.TAG_TREATMENT_ID + "=" + treatment_id + "&"
+                        + MyGlobalVars.TAG_NAME + "=" + name + "&"
+                        + MyGlobalVars.TAG_EXPIRATION_DATE + "=" + expiration_date + "&"
+                        + MyGlobalVars.TAG_DOSAGE + "=" + dosage;
+                update = update.replaceAll(" ", "%20");
+                URL u = new URL(update);
+                connection = (HttpURLConnection) u.openConnection();
+                connection.setRequestMethod("GET");
+                connection.setRequestProperty("Content-length", "0");
+                connection.setUseCaches(false);
+                connection.setDoInput(true);
+                connection.setDoOutput(true);
+                connection.setAllowUserInteraction(false);
+                connection.setConnectTimeout(MyGlobalVars.TIMEOUT);
+                connection.setReadTimeout(MyGlobalVars.TIMEOUT);
+                connection.setRequestProperty("Cookie", MyGlobalVars.myCookie);
+                connection.connect();
+                int status = connection.getResponseCode();
+                switch (status) {
+                    case 200:
+                    case 201:
+                        InputStream responseStream = new BufferedInputStream(connection.getInputStream());
+                        BufferedReader br = new BufferedReader(new InputStreamReader(responseStream), 8);
+                        StringBuilder sb = new StringBuilder();
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            sb.append(line).append("\n");
+                        }
+                        br.close();
+                        String response = sb.toString();
+                        return response;
+                }
+
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                if (connection != null) {
+                    try {
+                        connection.disconnect();
+                    } catch (Exception ex) {
+                        Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         **/
+        protected void onPostExecute(Void file_url) {
+            // dismiss the dialog once got all details
+            //editContact.setText(data);
+            for (String ok : success) {
+                if (ok.contentEquals("0")) {
+                    Toast.makeText(getBaseContext(), "Failed to update", Toast.LENGTH_SHORT);
+                }
+            }
+            if (pDialog.isShowing()) {
+                pDialog.dismiss();
+            }
+
+            spinnerMedicine.setAdapter(null);
+            initializeSpinner(spinnerMedicine);
+            new GetMedicineDetails().execute();
+        }
+    }
 
     public void saveTreatment(View view) {
         saveUpdateUser();
@@ -351,9 +592,6 @@ public class TreatmentActivity extends AppCompatActivity
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            for (int x = 0; x < 10; x++) {
-                System.out.println("im a banana");
-            }
             number = 0;
             pDialog = new ProgressDialog(TreatmentActivity.this);
             pDialog.setMessage("Loading user details. Please wait...");
@@ -466,8 +704,8 @@ public class TreatmentActivity extends AppCompatActivity
         protected void onPostExecute(Void file_url) {
             // dismiss the dialog once got all details
             //editContact.setText(data);
-            for(String ok : success) {
-                if(ok.contentEquals("0")) {
+            for (String ok : success) {
+                if (ok.contentEquals("0")) {
                     Toast.makeText(getBaseContext(), "Failed to update", Toast.LENGTH_SHORT);
                 }
             }
@@ -593,6 +831,8 @@ public class TreatmentActivity extends AppCompatActivity
 
             onChange = true;
 
+            spinnerMedicine.setAdapter(null);
+            initializeSpinner(spinnerMedicine);
             new GetMedicineDetails().execute();
         }
     }
@@ -762,7 +1002,7 @@ public class TreatmentActivity extends AppCompatActivity
         });
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Medicin change");
+        alert.setTitle("Medicine change");
         // this is set the view from XML inside AlertDialog
         alert.setView(alertLayout);
         // disallow cancel of AlertDialog on click of back button and outside touch
@@ -775,7 +1015,7 @@ public class TreatmentActivity extends AppCompatActivity
             }
         });
 
-        alert.setPositiveButton("Batch Number", new DialogInterface.OnClickListener() {
+        alert.setPositiveButton("Apply changes", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -799,7 +1039,7 @@ public class TreatmentActivity extends AppCompatActivity
                     }
 
                     if (j == 2 || j == 0) {
-                        ((TextView) myView).setText(name.getText().toString());
+                        ((TextView) myView).setText(name.getText().toString() + " : ");
                     }
 
                     if (j == 1) {
@@ -819,7 +1059,7 @@ public class TreatmentActivity extends AppCompatActivity
         dialog.show();
     }
 
-    public void add_medicine(int view) {
+    public void add_medicine(View view) {
         LayoutInflater inflater = getLayoutInflater();
         View alertLayout = inflater.inflate(R.layout.medicine_change_dialog, null);
         final EditText batch_number = (EditText) alertLayout.findViewById(R.id.batch_number);
@@ -851,7 +1091,7 @@ public class TreatmentActivity extends AppCompatActivity
             }
         });
 
-        alert.setPositiveButton("Batch Number", new DialogInterface.OnClickListener() {
+        alert.setPositiveButton("Apply changes", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -860,6 +1100,53 @@ public class TreatmentActivity extends AppCompatActivity
                 expiration = expiration_date.getText().toString();
                 dose = dosage.getText().toString();
                 Toast.makeText(getBaseContext(), "Batch number: " + batch_number.getText().toString() + " " + number + " Time: " + name.getText().toString(), Toast.LENGTH_SHORT).show();
+                addMedicinesave();
+            }
+        });
+        AlertDialog dialog = alert.create();
+        dialog.show();
+    }
+
+    public void add_treatment(View view) {
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.treatment_change_dialog, null);
+        final EditText start = (EditText) alertLayout.findViewById(R.id.start_date);
+        final EditText end = (EditText) alertLayout.findViewById(R.id.end_date);
+        final EditText doct = (EditText) alertLayout.findViewById(R.id.treatment_doctor);
+        final CheckBox show = (CheckBox) alertLayout.findViewById(R.id.show);
+
+
+        show.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+            }
+        });
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Treatment add");
+        // this is set the view from XML inside AlertDialog
+        alert.setView(alertLayout);
+        // disallow cancel of AlertDialog on click of back button and outside touch
+        alert.setCancelable(false);
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getBaseContext(), "Cancel clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        alert.setPositiveButton("Apply changes", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                user = start.getText().toString();
+                nom = end.getText().toString();
+                expiration = doct.getText().toString();
+                Toast.makeText(getBaseContext(), "Batch number: " + start.getText().toString() + " " + number + " Time: " + end.getText().toString(), Toast.LENGTH_SHORT).show();
+                addTreatmentsave();
             }
         });
         AlertDialog dialog = alert.create();

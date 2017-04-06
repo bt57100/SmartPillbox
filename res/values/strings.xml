@@ -54,11 +54,13 @@
     <string name="ref_pharmacist">Referring pharmacist</string>
     <string name="contact">Contact</string>
     <string name="add_new_contact">Add new contact</string>
-    <string name="add">Add</string>
+    <string name="add_medicine">Add Medicine</string>
+    <string name="add_treatment">Add Treatment</string>
     <string name="delete">Delete</string>
     <string name="save">Save</string>
     <string name="relationship">Relationship</string>
     <string name="notify">Notify</string>
+    <string name="add">Add</string>
 
     <string name="medical_staff">Medical Staff</string>
     <string name="rights">Rights to change information</string>

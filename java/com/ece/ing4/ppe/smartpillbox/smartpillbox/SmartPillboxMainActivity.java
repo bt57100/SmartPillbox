@@ -31,8 +31,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SmartPillboxMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -231,5 +241,110 @@ public class SmartPillboxMainActivity extends AppCompatActivity
      * This is the onClick called from the XML to set a new notification
      */
     public void onDateSelectedButtonClick(View v){}
+
+    /**
+     * Background Async Task to Get complete product details
+     * */
+    class GetPatientDetails extends AsyncTask<Void, Void, Void> {
+
+        private String data = "";
+        private ArrayList<String> patientNames = new ArrayList<>();
+        private ArrayList<String> patientIDs = new ArrayList<>();
+
+        JSONObject jsonData;
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(PatientActivity.this);
+            pDialog.setMessage("Loading user details. Please wait...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        /**
+         * Getting product details in background thread
+         */
+        protected Void doInBackground(Void... voids) {
+            try {
+                data = getJSON();
+                jsonData = new JSONObject(data);
+
+                JSONArray users = jsonData.getJSONArray(MyGlobalVars.TAG_PATIENT_MIN);
+                for(int i = 0; i < users.length(); i++) {
+                    JSONObject user = users.getJSONObject(i);
+                    patientIDs.add(user.getString(MyGlobalVars.TAG_USER_ID));
+                    patientNames.add(user.getString(MyGlobalVars.TAG_NAME));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        public String getJSON() {
+            HttpURLConnection connection = null;
+            try {
+                URL u = new URL(MyGlobalVars.url_get_patient+MyGlobalVars.TAG_MEDECIN_ID+"="+user_id);
+                connection = (HttpURLConnection) u.openConnection();
+                connection.setRequestMethod("GET");
+                connection.setRequestProperty("Content-length", "0");
+                connection.setUseCaches(false);
+                connection.setDoInput(true);
+                connection.setDoOutput(true);
+                connection.setAllowUserInteraction(false);
+                connection.setConnectTimeout(MyGlobalVars.TIMEOUT);
+                connection.setReadTimeout(MyGlobalVars.TIMEOUT);
+                connection.setRequestProperty("Cookie", MyGlobalVars.myCookie);
+                connection.connect();
+                int status = connection.getResponseCode();
+                switch (status) {
+                    case 200:
+                    case 201:
+                        InputStream responseStream = new BufferedInputStream(connection.getInputStream());
+                        BufferedReader br = new BufferedReader(new InputStreamReader(responseStream),8);
+                        StringBuilder sb = new StringBuilder();
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            sb.append(line).append("\n");
+                        }
+                        br.close();
+                        String response = sb.toString();
+                        return response;
+                }
+
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                if (connection != null) {
+                    try {
+                        connection.disconnect();
+                    } catch (Exception ex) {
+                        Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+            return "";
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * **/
+        protected void onPostExecute(Void file_url) {
+            // dismiss the dialog once got all details
+            patient_names = this.patientNames;
+            patient_ids = this.patientIDs;
+            initializePatients();
+            if(pDialog.isShowing()) {
+                pDialog.dismiss();
+            }
+        }
+    }
 
 }

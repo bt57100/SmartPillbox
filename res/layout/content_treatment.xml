@@ -40,52 +40,21 @@
                 android:prompt="@string/mail"
                 android:layout_columnSpan="3" />
 
-            <TextView
-                android:text="@string/current_medicine"
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/butonAddNewTreatment"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/mytextName"
-                android:layout_weight="1"
-                android:layout_columnSpan="1" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="@string/ref_pharmacist"
-                android:ems="10"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:id="@+id/editPharmacist"
-                android:layout_weight="1"
-                android:layout_columnSpan="2"/>
-
-
-            <TextView
-                android:text="@string/contact"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textContact"
-                android:layout_weight="1"
-                android:layout_columnSpan="1" />
-
-            <EditText
-                android:id="@+id/opLevel"
-                android:layout_width="138dp"
-                android:layout_height="wrap_content"
-                android:layout_columnSpan="1"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin"/>
+                android:layout_columnSpan="3"
+                android:onClick="add_treatment"
+                android:text="@string/add_treatment" />
 
             <Button
-                android:id="@+id/buttonAddNewContact"
-                android:layout_width="55dp"
+                android:id="@+id/buttonAddNewMedicine"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_columnSpan="1"
-                android:text="@string/add" />
+                android:layout_columnSpan="3"
+                android:onClick="add_medicine"
+                android:text="@string/add_medicine" />
 
             <include
                 android:id="@+id/medicineAddLayout"
